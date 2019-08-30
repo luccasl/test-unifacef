@@ -1,22 +1,20 @@
 var mediaRenda = .0
-var mediaNroFilhos = .0
 var maiorIdade = 0
 var menorIdade = 0
-var percMul = .0
-var nroMul = 0
+var qtdeMul = 0
 
 function resultados() {
     alert(`::Resultados::
 =======================================================
 Media de salário: ${mediaRenda}
-Media de nro. de filhos: ${mediaNroFilhos}
-Maior salário: ${maiorSal}
-Percentual de mulher com salário superior a R$ 1000.00: ${percMul}%`)
+Maior idade do grupo: ${maiorIdade}
+Menor idade do grupo: ${menorIdade}
+Quantidade de mulheres com mais de 2 filhos e renda familiar < R$600,00: ${qtdeMul}`)
 }
 
 function funcao() {
     var i = 0
-    while(i < 20) {
+    while(i < 3) {
         let idade = 0
         if(!(idade = parseInt(prompt("Informar idade:")))) {
             alert("Favor informar uma idade valida!")
@@ -39,29 +37,22 @@ function funcao() {
         }
 
         mediaRenda += renda
-        mediaNroFilhos += nroFilhos
 
         if(idade > maiorIdade) {
             maiorIdade = idade
         }
-        if(idade < menorIdade) {
+        if(idade < menorIdade || i == 0) {
             menorIdade = idade
         }
 
-        if(sexo == 'M') {
-            nroMul++
-
-            if(renda > 1000) {
-                percMul++
-            }
+        if(sexo == 'M' && renda < 600 && nroFilhos > 2) {
+            qtdeMul++
         }
 
         i++
     }
 
     mediaRenda = mediaRenda / i
-    mediaNroFilhos = mediaNroFilhos / i
-    percMul = 100 * (percMul / nroMul)
 
     resultados()
 }

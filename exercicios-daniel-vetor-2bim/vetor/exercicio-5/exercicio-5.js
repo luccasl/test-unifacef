@@ -76,7 +76,7 @@ function revisarEstoque() {
             continue
         }
 
-        novoVetProd.push(vetProd[i].codigo, descricao, valorUnit, qtdeEstoque)
+        novoVetProd.push(Produto(vetProd[i].codigo, descricao, valorUnit, qtdeEstoque))
     }
 
     novoVetProd.sort()
