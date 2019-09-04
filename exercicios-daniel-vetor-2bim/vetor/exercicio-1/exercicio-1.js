@@ -22,13 +22,29 @@ var vendas = {
     }
 } */
 
-
+//Time de vendedores(chave: código, valor: nome)
 var vendedores = {}
+//Vendas associadas a vendedores por mês(chave:mês, valor:{chave:<código do vendedor>, valor:<valor em reais da venda>})
 var vendas = {}
 
+//Retornar lista com todos vendedores precedidos por seus códigos.
+function listarVendedores() {
+    var tabVend = "Vendedores:"
+    for(vend in vendedores) {
+        if(tabVend.length > 0) {
+            tabVend += "\n"
+        }
+        tabVend += `.${vend} - ${vendedores[vend]}`
+    }
+
+    return tabVend
+}
+
+//Rotina de cadastro de vendedor
 function cadastrarVendedor() {
     var cod = 0
-    while(!(cod = parseInt(prompt("Informar código do vendedor:"))) ||
+    while(!(cod = parseInt(prompt(`${listarVendedores()}
+Informar código do vendedor:`))) ||
     vendedores[cod] != undefined) {
         alert("Favor informar um código válido!")
     }
@@ -40,17 +56,10 @@ function cadastrarVendedor() {
     vendedores[cod] = nome
 }
 
+//Rotina de cadastro de vendas
 function cadastrarVenda() {
-    var tabVend = ""
-    for(vend in vendedores) {
-        if(tabVend.length > 0) {
-            tabVend += "\n"
-        }
-        tabVend += `.${vend} - ${vendedores[vend]}`
-    }
-
     var cod = 0
-    while(!(cod = parseInt(prompt(`${tabVend}
+    while(!(cod = parseInt(prompt(`${listarVendedores()}
 Informar código do vendedor:`))) ||
     vendedores[cod] == undefined) {
         alert("Favor informar um código válido!")
@@ -69,9 +78,11 @@ Informar código do vendedor:`))) ||
     vendas[mes][cod] = valor
 }
 
+//Rotina de consulta de vendas mensais de determinado vendedor
 function consultarVendasMensal() {
     var cod = 0
-    while(!(cod = parseInt(prompt("Informar código do vendedor:"))) ||
+    while(!(cod = parseInt(prompt(`${listarVendedores()}
+Informar código do vendedor:`))) ||
     vendedores[cod] == undefined) {
         alert("Favor informar um código válido!")
     }
@@ -87,9 +98,11 @@ Mês nro. ${mes}
 Vendas: R$${vendas[mes][cod]}`)
 }
 
+//Rotina de consulta de total de vendas de determinado vendedor
 function consultarTotalVendedor() {
     var cod = 0
-    while(!(cod = parseInt(prompt("Informar código do vendedor:"))) ||
+    while(!(cod = parseInt(prompt(`${listarVendedores()} 
+Informar código do vendedor:`))) ||
     vendedores[cod] == undefined) {
         alert("Favor informar um código válido!")
     }
@@ -105,6 +118,7 @@ function consultarTotalVendedor() {
 Total de vendas: R$${total}`)
 }
 
+//Rotina de encontrar melhor vendedor de determinado mês
 function melhorVendedorMes() {
     var mes = 0
     while(!(mes = parseInt(prompt("Informar número do mês:"))) ||
@@ -126,6 +140,7 @@ Vendedor que mais vendeu: ${cod}(${vendedores[cod]})
 Valor vendido: R$${maiorValor}`)
 }
 
+//Rotina de encontrar mês com maior valor em vendas
 function mesMaisVendas() {
     var maiorTotal = 0
     var mesMaior = 0
@@ -145,6 +160,7 @@ function mesMaisVendas() {
 Vendas: R$${maiorTotal}`)
 }
 
+//Inicializar time de vendedores
 function inicializar() {
     for(let i = 0; i < 4; i++) {
         let cod = 0
@@ -182,6 +198,7 @@ function inicializar() {
     }
 }
 
+//Construir menu de rotinas do programa
 function menu() {
     fim = false
 
@@ -232,7 +249,9 @@ Selecionar opção:`)
     }
 }
 
+//Início do programa
 function comeco() {
+    alert("Favor cadastrar vendedores iniciais:")
     inicializar()
 
     menu()
