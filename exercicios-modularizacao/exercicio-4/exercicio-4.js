@@ -1,5 +1,5 @@
 function calcularVolume(r) {
-	return (4/3) * (r*r*r)
+	return (4*Math.PI * r*r*r) / 3
 }
 
 function inicio() {
